@@ -6,7 +6,6 @@ import 'package:rest_app/src/pages/home_page.dart';
 void main() {
   
   runApp(RestApp());
-
   
 }
 
@@ -21,6 +20,8 @@ class RestApp extends StatelessWidget {
         initialRoute: 'home',
         routes: {
           'home'     : ( BuildContext context ) => HomePage(),
+          
+          
         },
         theme: ThemeData(
           primaryColor: Colors.black,
