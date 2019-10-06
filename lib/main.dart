@@ -20,8 +20,6 @@ class RestApp extends StatelessWidget {
         initialRoute: 'home',
         routes: {
           'home'     : ( BuildContext context ) => HomePage(),
-          
-          
         },
         theme: ThemeData(
           primaryColor: Colors.black,
