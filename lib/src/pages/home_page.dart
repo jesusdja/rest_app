@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rest_app/src/pages/config_page.dart';
 // import 'dart:math';
 
 class HomePage extends StatelessWidget {
@@ -13,7 +14,9 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon( Icons.settings),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.pushNamed(context, '/config');
+            },
             )
         ],
 
