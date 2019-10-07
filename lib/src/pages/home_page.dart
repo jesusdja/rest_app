@@ -9,12 +9,20 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        
+        actions: <Widget>[
+          IconButton(
+            icon: Icon( Icons.settings),
+            onPressed: (){},
+            )
+        ],
+
       ),
 
       body: Stack(
         children: <Widget>[
           _imagenFondo(),
-          _info()
+          _contenido()
         ],
       ),
       
@@ -34,92 +42,125 @@ class HomePage extends StatelessWidget {
     );
   }
   
-Widget _info(){
-
+  Widget _contenido(){
+  
   return Container(
+    margin: EdgeInsets.symmetric(horizontal: 20.0 , vertical: 20.0 ),
+    decoration: BoxDecoration(
+      color: Color.fromRGBO(0, 0, 0, 0.7),
+      borderRadius: BorderRadius.circular(20.0)
+    ),
     child: Row(
       children: <Widget>[
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 40.0),
-                width: 180.0,
-                // margin: EdgeInsets.symmetric(horizontal: ),
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(0, 0, 0, 0.8),
-                    borderRadius: BorderRadius.circular(20.0)
-                  ),
-                child: 
-                  Image(
-                    image: AssetImage('assets/logo-blanco-100x100.png'),
-                  ),
-                )
-            ],
+        _logo(),
+        _instrucciones(), 
+        Column(
+          children: <Widget>[
+            _crearBoton('Menú Medio día', 200.0, 0.0 ),               
+            _crearBoton('Menú Noches', 25.0, 0.0 ),               
+            _crearBoton('Menú Fin de Semana', 25.0, 0.0 ),  
+            _crearBoton('A la Carta', 25.0, 0.0 ),              
+          ]
+        )
+      ],
+    ),
+  );
+}
+
+  Widget _logo(){
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+          child: Image(
+            image: AssetImage('assets/logo-completo-blanco-120x126.png'),
           ),
         ),
-
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 40.0),
-                width: 300.0,
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(0, 0, 0, 0.8),
-                    borderRadius: BorderRadius.circular(20.0)
-                  ),
-                child: Text('Menú 1')
-              )
-            ],
-          ),
-        ),
-
-
-
-
-
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(25.0, 200.0, 25.0, 15.0),
-                child: _crearBoton('Menú 1')
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 25.0,vertical: 15.0),
-                child: _crearBoton('Menú 2')
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 25.0,vertical: 15.0),
-                child: _crearBoton('Menú 3')
-              )
-             ],
-            ),
-          ),
-        ],
-      ),
+      ]
     );
+    
+  }  
+
+  Widget _titulo(String text, double fontSize, FontWeight fontWeight){
+
+    return Container(
+      padding: EdgeInsets.only(top: 40.0,right: 10.0),
+      child: Text(
+        '$text',
+        style: TextStyle(
+          color: Colors.white, 
+          fontSize: fontSize,
+          fontWeight: fontWeight
+        )
+      )
+    );
+    
   }
+  Widget _textos(String text, double fontSize, FontWeight fontWeight){
 
-  Widget _crearBoton(String label){
 
-    return RaisedButton(
-        child: Container(
-          padding: EdgeInsets.symmetric( horizontal: 80.0, vertical: 25.0),
-          child: Text('$label',style: TextStyle(color: Colors.white, fontSize: 30.0)),
+    return Container(
+      padding: EdgeInsets.only(top: 15.0),
+      child: Text(
+      '$text',
+      style: TextStyle(
+          color: Colors.white, 
+          fontSize: fontSize,
+          fontWeight: fontWeight
+        )
+      )
+    );
+    
+  }
+  Widget _instrucciones(){    
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _titulo('Bienvenidos a Rong Hua Asian Cosine',40.0,FontWeight.bold),
+        SizedBox(height: 20.0),
+        _textos('Menús por persona', 30.0, FontWeight.bold),
+        _textos('Medio día: 13,75€. De lunes a viernes no festivos ', 20.0, FontWeight.normal),
+        _textos('Noches: 17,95€. De lunes a jueves no festivos', 20.0, FontWeight.normal),
+        _textos('Fines de Semana: 19,95€ De viernes noche a domingo festivos y vísperas', 20.0, FontWeight.normal),
+        _textos('Niños hasta 8 años: 7,95€ - Menores de 3 años gratis', 20.0, FontWeight.normal),
+        SizedBox(height: 20.0),
+        _textos('Condiciones', 30.0, FontWeight.bold),
+        _textos('- Todos los comensales deben elegir la misma opción.', 18.0, FontWeight.normal),
+        _textos('- En todas las opciones de menú se pueden elegir desde el plato nº 1 al nº 74.', 18.0, FontWeight.normal),
+        _textos('- Por cada menú se puede pedir 3 rondas de 5 platos cada una', 18.0, FontWeight.normal),
+        _textos('- Menú válido solo en el local, no se puede sacar fuera del establecimiento', 18.0, FontWeight.normal),
+        _textos('- Se penalizará con 2,00€ por cada plato no consunido', 18.0, FontWeight.normal),
+        _textos('- Se debe consumir mínimo una bebida por menú', 18.0, FontWeight.normal),
+
+      ],
+    );
+
+  }
+  Widget _crearBoton(String label, double top, double bottom){
+
+    return Column(
+      children: <Widget>[
+        Container(
+          width: 375.0,
+          padding: EdgeInsets.only(top: top,bottom: bottom),
+          child: RaisedButton(
+            child: Container(
+              padding: EdgeInsets.symmetric( horizontal: 70.0, vertical: 20.0),
+              child: Text('$label',style: TextStyle(color: Colors.white, fontSize: 20.0)),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0)
+            ),
+            elevation: 0.0,
+            color: Colors.deepOrange,
+            textColor: Colors.black,
+            onPressed: (){}
+          ),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0)
-        ),
-        elevation: 0.0,
-        color: Colors.black87,
-        textColor: Colors.white,
-        onPressed: (){}
-      );
+      ]
+    );
+
   }
 
 }
