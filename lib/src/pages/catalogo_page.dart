@@ -7,7 +7,9 @@ class CatalogoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+        title: Text('Catálogo'),
+      ),
       body: PageView(
         children: <Widget>[
           _bebidas(),
@@ -53,6 +55,7 @@ Widget _gridProductos(){
  List listaProductos = ['Producto 1 ', 'Producto 2 ', 'Producto 3 ', 'Producto 4 ', 'Producto 5 ', 'Producto 6 ', 'Producto 7 ', 'Producto 8 '];
   
   return GridView.count(
+    
     crossAxisCount: 4,
     primary: true,
     padding: EdgeInsets.all(20.0),

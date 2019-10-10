@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rest_app/src/pages/config_page.dart';
+import 'package:rest_app/src/util/util.dart';
+
 
 
 
@@ -15,9 +16,7 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon( Icons.settings),
-            onPressed: (){
-              Navigator.pushNamed(context, 'config');
-            },
+            onPressed: () => Navigator.pushNamed(context, 'config'),
             )
         ],
 
@@ -26,7 +25,7 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           _imagenFondo(),
-          _contenido()
+          _contenido(context)
         ],
       ),
       
@@ -46,7 +45,7 @@ class HomePage extends StatelessWidget {
     );
   }
   
-  Widget _contenido(){
+  Widget _contenido(context){
   
   return Container(
     margin: EdgeInsets.symmetric(horizontal: 20.0 , vertical: 20.0 ),
@@ -60,10 +59,10 @@ class HomePage extends StatelessWidget {
         _instrucciones(), 
         Column(
           children: <Widget>[
-            _crearBoton('Menú Medio día', 200.0, 0.0 ),               
-            _crearBoton('Menú Noches', 25.0, 0.0 ),               
-            _crearBoton('Menú Fin de Semana', 25.0, 0.0 ),  
-            _crearBoton('A la Carta', 25.0, 0.0 ),              
+            _crearBoton(context, 'Menú Medio día', 200.0, 0.0, 'catalogo'),               
+            _crearBoton(context, 'Menú Noches', 25.0, 0.0, 'catalogo' ),               
+            _crearBoton(context, 'Menú Fin de Semana', 25.0, 0.0, 'catalogo' ),  
+            _crearBoton(context, 'A la Carta', 25.0, 0.0, 'catalogo' ),              
           ]
         )
       ],
@@ -141,12 +140,12 @@ class HomePage extends StatelessWidget {
     );
 
   }
-  Widget _crearBoton(String label, double top, double bottom){
-
+  Widget _crearBoton(BuildContext context, String label, double top, double bottom, String ruta){
+    final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         Container(
-          width: 375.0,
+          width: size.width * 0.3,
           padding: EdgeInsets.only(top: top,bottom: bottom),
           child: RaisedButton(
             child: Container(
@@ -159,11 +158,19 @@ class HomePage extends StatelessWidget {
             elevation: 0.0,
             color: Colors.deepOrange,
             textColor: Colors.black,
-            onPressed: (){}
+            onPressed: (){ 
+              Navigator.pushNamed(context, '$ruta');
+              _abrirMesa(context);
+            }   
+  
           ),
         ),
       ]
     );
+
+  }
+  _abrirMesa(BuildContext context){
+    mostrarAlerta(context, 'Abrir Mesa' , '¿Abrimos mesa?');
 
   }
 
