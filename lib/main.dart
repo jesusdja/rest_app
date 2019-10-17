@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rest_app/src/blocs/provider.dart';
 
 import 'package:rest_app/src/pages/home_page.dart';
 import 'package:rest_app/src/pages/config_page.dart';
@@ -17,7 +18,9 @@ class RestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+
+    return Provider(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
         initialRoute: 'home',
@@ -31,6 +34,11 @@ class RestApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.black,
         ),
-      );
+      )
+    );
+    
+    
+    
+    
   }
 }

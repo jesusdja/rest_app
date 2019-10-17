@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rest_app/src/blocs/provider.dart';
 
 void mostrarAlerta(BuildContext context, String titulo, String mensaje, ) {
 
@@ -39,7 +40,7 @@ void mostrarAlerta(BuildContext context, String titulo, String mensaje, ) {
 
 void mostrarLogin(BuildContext context, String titulo) {
   
-  final size = MediaQuery.of(context).size;
+  
 
  _accion(bool isOk, BuildContext context){
    if(isOk){
@@ -51,36 +52,53 @@ void mostrarLogin(BuildContext context, String titulo) {
    }
 }
 
-  Widget _crearEmail() {
+  Widget _crearEmail(LoginBloc bloc) {
 
-      return Container(
-        padding: EdgeInsets.symmetric( horizontal: 20.0 ),
-        child: TextField(
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            icon: Icon(Icons.alternate_email, color: Colors.black,),
-            hintText: 'ejemplo@correo.com',
-            labelText: 'Correo electrónico'
+    return StreamBuilder(
+      stream: bloc.emailStream ,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        
+        return Container(
+          padding: EdgeInsets.symmetric( horizontal: 20.0 ),
 
+          child: TextField(
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              icon: Icon(Icons.alternate_email, color: Colors.black,),
+              hintText: 'ejemplo@correo.com',
+              labelText: 'Correo electrónico',
+              counterText: snapshot.data
+            ),
+            onChanged: bloc.changeEmail,
           ),
-        ),
-      );
-
-    }
+        );
+      },
+    ); 
+  }
   
-  Widget _crearPassword() {
+  Widget _crearPassword(LoginBloc bloc) {
 
-    return Container(
-      padding: EdgeInsets.symmetric( horizontal: 20.0 ),
-      child: TextField(
-        obscureText: true,
-        decoration: InputDecoration(
-          icon: Icon(Icons.lock, color: Colors.black,),
-          labelText: 'Contraseña'
+    return StreamBuilder(
+      stream: bloc.passwordStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
 
-        ),
-      ),
+        return Container(
+          padding: EdgeInsets.symmetric( horizontal: 20.0 ),
+
+          child: TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock, color: Colors.black,),
+              labelText: 'Contraseña',
+              counterText: snapshot.data
+            ),
+            onChanged: bloc.changePassword,
+          ),
+        );
+      },
     );
+
+    
   } 
   Widget _crearBoton( String etiqueta){
 
@@ -88,7 +106,7 @@ void mostrarLogin(BuildContext context, String titulo) {
       color: Colors.black,
       textColor: Colors.white,      
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 100.0, vertical: 15.0),
+        padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 10.0),
         child: Text(etiqueta),
         
       ),
@@ -98,27 +116,36 @@ void mostrarLogin(BuildContext context, String titulo) {
       onPressed: () => _accion(true, context),
     );
   }
+  
 Widget _loginForm(BuildContext context, String titulo){
+    
+//TODO: Ponerlo en un popup menu
+
+    final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
     
     return Container( 
 
-      padding: EdgeInsets.all(20.0),
-      width: size.width * 0.5,
+      padding: EdgeInsets.all(5.0),
+      width: size.width * 0.4,
+      
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
       ),
+
       child: Column(      
         children: <Widget>[
-          _crearEmail(),
-          SizedBox(height: 30.0,),
-          _crearPassword(),
-          SizedBox(height: 30.0,),
-          _crearBoton('Entrar'),
-          
+          _crearEmail(bloc),
+          SizedBox(height: 10.0,),
+          _crearPassword(bloc),
+          SizedBox(height: 10.0,),
+          _crearBoton('Entrar'),  
+          SizedBox(height: 10.0,),
+          Text('¿Olvidé la contarseña?')        
          
         ]
-      ) 
+      )
+       
     );
 
   }
@@ -126,13 +153,15 @@ Widget _loginForm(BuildContext context, String titulo){
     context: context,
     builder: ( context ) {
       return AlertDialog(
+        titlePadding: EdgeInsetsDirectional.only(bottom: 10.0),
+        contentPadding: EdgeInsetsDirectional.only(top: 10.0),
         title: Text(titulo),
         backgroundColor: Colors.white,
-        actions: <Widget>[
-          
-          _loginForm(context, 'Login'),               
-          
+
+        actions: <Widget>[          
+          _loginForm(context, 'Login'),             
         ],
+      
       );
     }
   );
