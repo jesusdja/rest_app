@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rest_app/src/pages/home_page.dart';
 import 'package:rest_app/src/pages/config_page.dart';
 import 'package:rest_app/src/pages/catalogo_page.dart';
+import 'package:rest_app/src/pages/prueba_page.dart';
 
 
 void main() {
@@ -24,6 +25,7 @@ class RestApp extends StatelessWidget {
           'home'     : ( BuildContext context ) => HomePage(),
           'config'     : ( BuildContext context ) => ConfigPage(),
           'catalogo'     : ( BuildContext context ) => CatalogoPage(),
+          'prueba'     : ( BuildContext context ) => PruebaPage(),
 
         },
         theme: ThemeData(

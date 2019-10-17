@@ -16,7 +16,9 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon( Icons.settings),
-            onPressed: () => Navigator.pushNamed(context, 'config'),
+            onPressed: () {
+              mostrarLogin(context, 'Login');
+            },
             )
         ],
 
@@ -143,6 +145,7 @@ class HomePage extends StatelessWidget {
   Widget _crearBoton(BuildContext context, String label, double top, double bottom, String ruta){
     final size = MediaQuery.of(context).size;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Container(
           width: size.width * 0.3,
