@@ -16,9 +16,7 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon( Icons.settings),
-            onPressed: () {
-              mostrarLogin(context, 'Login');
-            },
+            onPressed: () => Navigator.of(context).pushNamed('login')
             )
         ],
 
