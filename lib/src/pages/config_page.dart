@@ -14,7 +14,7 @@ class ConfigPage extends StatelessWidget {
       ),
       body: Row(
           children: <Widget>[
-          _campoTexto(context, 'Mesa', 'Número de mesa asociada al dispositivo'),
+          _campoTexto(context, 'Mesa', 'Número de mesa de este dispositivo'),
           
           ]
         )
@@ -32,12 +32,22 @@ class ConfigPage extends StatelessWidget {
         children: <Widget>[
           TextField(
             enabled: true,
+            style: TextStyle(fontSize: 25.0),
             decoration: InputDecoration(
-              labelText: etiqueta,
-              helperText: helper
+              helperStyle: TextStyle(fontSize: 18.0),
+              hintStyle: TextStyle(fontSize: 25.0),
+              hintText: (etiqueta),
+              helperText: helper,              
             ),
             onChanged: ( value ){},
-          )
+          ),
+
+          RaisedButton(
+            child: Text('Productos'),  
+            color: Colors.black,
+            textColor: Colors.white,
+            onPressed: () => Navigator.of(context).pushNamed('producto'),
+            ),
         ]
       ) 
     );

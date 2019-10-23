@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rest_app/src/util/util.dart';
+import 'package:rest_app/src/utils/utils.dart' as utils;
 
 
 
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon( Icons.settings),
-            onPressed: () => Navigator.of(context).pushNamed('login')
+            onPressed: () => Navigator.of(context).pushNamed('config')
             )
         ],
 
@@ -59,10 +59,10 @@ class HomePage extends StatelessWidget {
         _instrucciones(), 
         Column(
           children: <Widget>[
-            _crearBoton(context, 'Menú Medio día', 200.0, 0.0, 'catalogo'),               
-            _crearBoton(context, 'Menú Noches', 25.0, 0.0, 'catalogo' ),               
-            _crearBoton(context, 'Menú Fin de Semana', 25.0, 0.0, 'catalogo' ),  
-            _crearBoton(context, 'A la Carta', 25.0, 0.0, 'catalogo' ),              
+            _crearBoton(context, 'Menú Medio día', 200.0, 0.0, 'carta'),               
+            _crearBoton(context, 'Menú Noches', 25.0, 0.0, 'carta' ),               
+            _crearBoton(context, 'Menú Fin de Semana', 25.0, 0.0, 'carta' ),  
+            _crearBoton(context, 'A la Carta', 25.0, 0.0, 'carta' ),              
           ]
         )
       ],
@@ -100,7 +100,6 @@ class HomePage extends StatelessWidget {
     
   }
   Widget _textos(String text, double fontSize, FontWeight fontWeight){
-
 
     return Container(
       padding: EdgeInsets.only(top: 15.0),
@@ -161,7 +160,7 @@ class HomePage extends StatelessWidget {
             textColor: Colors.black,
             onPressed: (){ 
               Navigator.pushNamed(context, '$ruta');
-              _abrirMesa(context);
+              // _abrirMesa(context);
             }   
   
           ),
@@ -171,7 +170,7 @@ class HomePage extends StatelessWidget {
 
   }
   _abrirMesa(BuildContext context){
-    mostrarAlerta(context, 'Abrir Mesa' , '¿Abrimos mesa?');
+    utils.mostrarAlerta(context, 'Abrir Mesa' , '¿Abrimos mesa?');
 
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:io';
 import 'package:device_info/device_info.dart';
-import 'package:rest_app/src/util/util.dart';
+import 'package:rest_app/src/utils/utils.dart' as utils;
 
 
 class PruebaPage extends StatefulWidget {
@@ -31,7 +31,7 @@ String id = "";
               child: Text('PRUEBA'),
               onPressed: () async{
                 id = await _getDeviceIdentity();
-                mostrarAlerta(context, 'Id Dispositivo', id);
+                utils.mostrarAlerta(context, 'Id Dispositivo', id);
               },
             ),
           ),

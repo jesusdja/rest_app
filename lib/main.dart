@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rest_app/src/blocs/provider.dart';
 
+import 'package:rest_app/src/blocs/provider.dart';
 import 'package:rest_app/src/pages/home_page.dart';
 import 'package:rest_app/src/pages/config_page.dart';
-import 'package:rest_app/src/pages/catalogo_page.dart';
 import 'package:rest_app/src/pages/login_page.dart';
+import 'package:rest_app/src/pages/producto_page.dart';
 import 'package:rest_app/src/pages/prueba_page.dart';
+import 'package:rest_app/src/pages/carta_page.dart';
+
 
 
 void main() {
@@ -28,9 +30,11 @@ class RestApp extends StatelessWidget {
         routes: {
           'home'       : ( BuildContext context ) => HomePage(),
           'config'     : ( BuildContext context ) => ConfigPage(),
-          'catalogo'   : ( BuildContext context ) => CatalogoPage(),
+          'carta'   : ( BuildContext context ) => CartaPage(),
           'prueba'     : ( BuildContext context ) => PruebaPage(),
-          'login'      : ( BuildContext context ) => LoginPage()
+          'login'      : ( BuildContext context ) => LoginPage(),
+          'producto'   : ( BuildContext context ) => ProductoPage(),
+          
 
         },
         theme: ThemeData(
