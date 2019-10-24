@@ -7,6 +7,7 @@ import 'package:rest_app/src/pages/login_page.dart';
 import 'package:rest_app/src/pages/producto_page.dart';
 import 'package:rest_app/src/pages/prueba_page.dart';
 import 'package:rest_app/src/pages/carta_page.dart';
+import 'package:rest_app/src/utils/botonesMenu.dart';
 
 
 
@@ -34,8 +35,7 @@ class RestApp extends StatelessWidget {
           'prueba'     : ( BuildContext context ) => PruebaPage(),
           'login'      : ( BuildContext context ) => LoginPage(),
           'producto'   : ( BuildContext context ) => ProductoPage(),
-          
-
+          'buttonsMenu'   : ( BuildContext context ) => buttonsMenu(),
         },
         theme: ThemeData(
           primaryColor: Colors.black,
