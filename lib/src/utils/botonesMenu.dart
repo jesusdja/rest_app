@@ -9,6 +9,14 @@ class buttonsMenu extends StatefulWidget {
 
 class _buttonsMenuState extends State<buttonsMenu> {
 
+  List<String> _listImage = new List<String>();
+
+  @override
+  void initState() {
+    _llenarlistImage();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +31,15 @@ class _buttonsMenuState extends State<buttonsMenu> {
       ),
     );
   }
-  Widget _imagenFondo() {
 
+  _llenarlistImage(){
+    _listImage.add("comidaEjemplo.jpg");
+    _listImage.add("comidaEjemplo.jpg");
+    _listImage.add("comidaEjemplo.jpg");
+  }
+
+
+  Widget _imagenFondo() {
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -79,34 +94,73 @@ class _buttonsMenuState extends State<buttonsMenu> {
           ),
         ]
     );
+  }
 
+  Widget _textos(String text){
+    return Container(
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.020),
+        child: Text(
+            '$text',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.normal
+            )
+        )
+    );
   }
 
   Widget _tipoMenu(BuildContext context,String label,String tipo,String descripcion){
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.25,
-      padding: EdgeInsets.only(right: 10,left: 10),
+      padding: EdgeInsets.only(right: 10,left: 10,bottom: size.height * 0.1),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          RaisedButton(
-              child: Container(
-                padding: EdgeInsets.symmetric( horizontal: size.width * 0.001, vertical: size.height * 0.03),
-                child: Text('$label',style: TextStyle(color: Colors.white, fontSize: 20.0),textAlign: TextAlign.center,),
+          Container(
+            width: double.infinity,
+            height: size.height * 0.15,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.001),
+              child: FlatButton(
+                color: Colors.deepOrange,
+                shape:new RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                child: Container(
+                  padding: EdgeInsets.symmetric( horizontal: size.width * 0.001, vertical: size.height * 0.03),
+                  child: Text('$label',style: TextStyle(color: Colors.white, fontSize: 20.0),textAlign: TextAlign.center,),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context,'carta');
+                },
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)
-              ),
-              elevation: 0.0,
-              color: Colors.deepOrange,
-              textColor: Colors.black,
-              onPressed: (){
-                Navigator.pushNamed(context,'carta');
-                // _abrirMesa(context);
-              }
+            ),
           ),
+          //galeria de imagenes
+          SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _listImage.length,
+                itemBuilder: (context,index){
+                  return Container(
+                    child: Card(
+                      child: Image.asset('assets/${_listImage[index]}'),
+                    ),
+                  );
+                },
+                // This next line does the trick.
+              ) ,
+            ),
+          ),
+          _textos(descripcion),
+
+
         ],
       ),
     );
