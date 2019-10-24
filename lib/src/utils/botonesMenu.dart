@@ -64,7 +64,7 @@ class _buttonsMenuState extends State<buttonsMenu> {
         children: <Widget>[
           _logo(context),
           Container(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: MediaQuery.of(context).size.width * 0.78,
             height: MediaQuery.of(context).size.height * 0.8,
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
             child: Row(
@@ -115,7 +115,7 @@ class _buttonsMenuState extends State<buttonsMenu> {
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.25,
-      padding: EdgeInsets.only(right: 10,left: 10,bottom: size.height * 0.1),
+      padding: EdgeInsets.only(right: 20,left: 10,bottom: size.height * 0.1),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
