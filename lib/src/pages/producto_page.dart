@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_search_panel/flutter_search_panel.dart';
+import 'package:flutter_search_panel/search_item.dart';
 import 'package:rest_app/src/models/producto_model.dart';
 import 'package:rest_app/src/providers/productos_provider.dart';
 import 'package:rest_app/src/utils/utils.dart' as utils; 
@@ -15,6 +17,11 @@ class _ProductoPageState extends State<ProductoPage> {
   final productoProvider = new ProductosProvider();
 
   ProductoModel producto = new ProductoModel();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +49,12 @@ class _ProductoPageState extends State<ProductoPage> {
               children: <Widget>[
                 _crearNombre(),
                 _crearPrecio(),
-                _crearBoton(),
+                _descripcion(),
+                _numeroPlato(),
+                _categoria(),
+                _alergenos(),
                 _crearDisponible(),
-
+                _crearBoton(),
               ],
             ),
           ),
@@ -71,7 +81,6 @@ class _ProductoPageState extends State<ProductoPage> {
         }
       },
     );
-    
   }
 
   Widget _crearPrecio(){
@@ -117,20 +126,74 @@ class _ProductoPageState extends State<ProductoPage> {
     );
   }
 
+  Widget _descripcion(){
+    return TextFormField(
+      initialValue: producto.descripcion,
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+          labelText: 'Descripción'
+      ),
+      onSaved: (value) => producto.descripcion = value,
+      validator: (value){
+        if (value.length < 10){
+          return 'Descripción mayor a diez(10) caracteres';
+        }
+        else{
+          return null;
+        }
+      },
+    );
+  }
+  Widget _numeroPlato(){
+    return Container();
+  }
+
+  List<SearchItem<int>> data = [
+    SearchItem(0, 'This'),
+    SearchItem(1, 'is'),
+    SearchItem(2, 'a'),
+    SearchItem(3, 'test'),
+    SearchItem(4, '.'),
+  ];
+
+  Widget _categoria(){
+    return FlutterSearchPanel(
+      padding: EdgeInsets.all(10.0),
+      selected: 'a',
+      title: 'Demo Search Page',
+      data: data,
+      icon: new Icon(Icons.label, color: Colors.black),
+      color: Colors.white,
+      textStyle: new TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20.0, decorationStyle: TextDecorationStyle.dotted),
+      onChanged: (value) {
+        print(value);
+      },
+    );
+  }
+
+  List _categorias = ['B','PL','E','P'];
+  List<DropdownMenuItem<String>> _dropDownMenuCurrencyItems;
+
+  List<DropdownMenuItem<String>> getDropDownMenuCategoriaItems() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (String currency in _categorias) {
+      items.add(new DropdownMenuItem(value: currency, child: new Text(currency)));
+    }
+    return items;
+  }
+  void changedDropDownItemCategoria(String selectedCategoria) {
+    setState(() {
+      producto.categoria = selectedCategoria;
+    });
+  }
+
+  Widget _alergenos(){
+    return Container();
+  }
+
   void _submit(){
-    
     if ( !formKey.currentState.validate() ) return;
-    
     formKey.currentState.save();
-
-    print('Todo OK!');
-    
-    print(producto.nombre);
-    print(producto.precio);
-    print(producto.disponible);
-
     productoProvider.crearProducto(producto);
-
-    
   }
 }

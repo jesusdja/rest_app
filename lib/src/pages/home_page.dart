@@ -88,7 +88,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ]
     );
-    
   }  
 
   Widget _titulo(String text, double fontSize, FontWeight fontWeight,double sizeH){
