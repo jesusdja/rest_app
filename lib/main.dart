@@ -29,12 +29,12 @@ class RestApp extends StatelessWidget {
         title: 'Material App',
         initialRoute: 'home',
         routes: {
-          'home'       : ( BuildContext context ) => HomePage(),
-          'config'     : ( BuildContext context ) => ConfigPage(),
-          'carta'   : ( BuildContext context ) => CartaPage(),
-          'prueba'     : ( BuildContext context ) => PruebaPage(),
-          'login'      : ( BuildContext context ) => LoginPage(),
-          'producto'   : ( BuildContext context ) => ProductoPage(),
+          'home'          : ( BuildContext context ) => HomePage(),
+          'config'        : ( BuildContext context ) => ConfigPage(),
+          'carta'         : ( BuildContext context ) => CartaPage(),
+          'prueba'        : ( BuildContext context ) => PruebaPage(),
+          'login'         : ( BuildContext context ) => LoginPage(),
+          'producto'      : ( BuildContext context ) => ProductoPage(),
           'buttonsMenu'   : ( BuildContext context ) => buttonsMenu(),
         },
         theme: ThemeData(

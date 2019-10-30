@@ -21,7 +21,7 @@ class _buttonsMenuState extends State<buttonsMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seleccionar Menu'),
+        title: Text('Abrir Mesa'),
       ),
       body: Stack(
         children: <Widget>[
@@ -33,9 +33,9 @@ class _buttonsMenuState extends State<buttonsMenu> {
   }
 
   _llenarlistImage(){
-    _listImage.add("comidaEjemplo.jpg");
-    _listImage.add("comidaEjemplo.jpg");
-    _listImage.add("comidaEjemplo.jpg");
+    // _listImage.add("comidaEjemplo.jpg");
+    // _listImage.add("comidaEjemplo.jpg");
+    // _listImage.add("comidaEjemplo.jpg");
   }
 
 
@@ -64,16 +64,18 @@ class _buttonsMenuState extends State<buttonsMenu> {
         children: <Widget>[
           _logo(context),
           Container(
-            width: MediaQuery.of(context).size.width * 0.78,
-            height: MediaQuery.of(context).size.height * 0.8,
+            // width: MediaQuery.of(context).size.width * 0.78,
+            // height: MediaQuery.of(context).size.height * 0.6,
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                _tipoMenu(context, 'Menú Medio día','MD','Descripción breve del menu'),
+                _tipoMenu(context, 'Menú Medio día','MD','Descripción breve del menu xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
                 _tipoMenu(context, 'Menú Noches','N','Descripción breve del menu'),
                 _tipoMenu(context, 'Menú Fin de Semana','FS','Descripción breve del menu'),
+                _tipoMenu(context, 'A la Carta','C','Descripción breve del menu'),
+
               ],
             ),
           ),
@@ -98,10 +100,10 @@ class _buttonsMenuState extends State<buttonsMenu> {
 
   Widget _textos(String text){
     return Container(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.020),
+        // padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.020),
         child: Text(
             '$text',
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -112,57 +114,57 @@ class _buttonsMenuState extends State<buttonsMenu> {
   }
 
   Widget _tipoMenu(BuildContext context,String label,String tipo,String descripcion){
+    
     final size = MediaQuery.of(context).size;
+    
     return Container(
-      width: size.width * 0.25,
-      padding: EdgeInsets.only(right: 20,left: 10,bottom: size.height * 0.1),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      width: size.width * 0.8,
+      padding: EdgeInsets.only(right: 20, left: 10, bottom: size.height * 0.07),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: size.height * 0.15,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.001),
-              child: FlatButton(
-                color: Colors.deepOrange,
-                shape:new RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                child: Container(
-                  padding: EdgeInsets.symmetric( horizontal: size.width * 0.001, vertical: size.height * 0.03),
-                  child: Text('$label',style: TextStyle(color: Colors.white, fontSize: 20.0),textAlign: TextAlign.center,),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context,'carta');
-                },
-              ),
-            ),
-          ),
-          //galeria de imagenes
-          SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.2,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _listImage.length,
-                itemBuilder: (context,index){
-                  return Container(
-                    child: Card(
-                      child: Image.asset('assets/${_listImage[index]}'),
+          Expanded(            
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: size.width * 0.20,
+                  height: size.height * 0.10,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                    child: FlatButton(
+                      color: Colors.deepOrange,
+                      shape:new RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                      child: Container(
+                        padding: EdgeInsets.symmetric( horizontal: size.width * 0.001, vertical: size.height * 0.03),
+                        child: Text('$label',style: TextStyle(color: Colors.white, fontSize: 20.0),textAlign: TextAlign.center,),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context,'carta');
+                      },
                     ),
-                  );
-                },
-                // This next line does the trick.
-              ) ,
+                  ),
+                ),
+              ]
             ),
-          ),
-          _textos(descripcion),
-
-
-        ],
-      ),
+           ),
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: size.width * .9,
+                  height: size.height * 0.10,
+                child: _textos(descripcion)
+                 )
+              ],
+            ) 
+          )
+        ]
+      )
     );
   }
+
 }

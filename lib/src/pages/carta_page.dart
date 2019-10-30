@@ -55,7 +55,7 @@ class _CartaPageState extends State<CartaPage> {
             Image(image: AssetImage('assets/logo-completo-blanco-120x126.png',),color: Colors.black,width: MediaQuery.of(context).size.width * 0.06,),
             Container(
                 margin: EdgeInsets.only(left: 10),
-                child: Text('ASIAN',style: TextStyle(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.height * 0.05) )
+                child: Text('Rong Hua Asian Cousine',style: TextStyle(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.height * 0.05) )
             )
           ],
         )

@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
         _instrucciones(context),
         Container(
           height: size.height * 0.8,
-          width: size.width * 0.20,
+          width: size.width * 0.2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               _crearBoton(context, 'Menú Noches', size.height * 0.03, 0.0, 'carta' ),
               _crearBoton(context, 'Menú Fin de Semana', size.height * 0.03, 0.0, 'carta' ),*/
               _crearBoton(context, 'Abrir Mesa', size.height * 0.1, 0.0, 'buttonsMenu' ),
-              _crearBoton(context, 'A la Carta', size.height * 0.03, 0.0, 'carta' ),
+              _crearBoton(context, 'Ver Carta', size.height * 0.03, 0.0, 'carta' ),
             ]
           ),
         ),
@@ -132,10 +132,10 @@ class _HomePageState extends State<HomePage> {
           _titulo('Bienvenidos a Rong Hua Asian Cosine',sizeH * 0.05,FontWeight.bold,sizeH),
           SizedBox(height: sizeH * 0.01),
           _textos('Menús por persona', sizeH * 0.04, FontWeight.bold,sizeH),
-          _textos('Medio día: 13,75€. De lunes a viernes no festivos ', sizeH * 0.03, FontWeight.normal,sizeH),
-          _textos('Noches: 17,95€. De lunes a jueves no festivos', sizeH * 0.03, FontWeight.normal,sizeH),
-          _textos('Fines de Semana: 19,95€ De viernes noche a domingo festivos y vísperas', sizeH * 0.03, FontWeight.normal,sizeH),
-          _textos('Niños hasta 8 años: 7,95€ - Menores de 3 años gratis', sizeH * 0.03, FontWeight.normal,sizeH),
+          _textos('Medio día: 13,75€. De lunes a viernes no festivos ', sizeH * 0.02, FontWeight.normal,sizeH),
+          _textos('Noches: 17,95€. De lunes a jueves no festivos', sizeH * 0.02, FontWeight.normal,sizeH),
+          _textos('Fines de Semana: 19,95€ De viernes noche a domingo festivos y vísperas', sizeH * 0.02, FontWeight.normal,sizeH),
+          _textos('Niños hasta 8 años: 7,95€ - Menores de 3 años gratis', sizeH * 0.02, FontWeight.normal,sizeH),
           SizedBox(height: sizeH * 0.01),
           _textos('Condiciones', sizeH * 0.04, FontWeight.bold,sizeH),
           _textos('- Todos los comensales deben elegir la misma opción.', sizeH * 0.02, FontWeight.normal,sizeH),
@@ -168,14 +168,12 @@ class _HomePageState extends State<HomePage> {
           textColor: Colors.black,
           onPressed: (){
             Navigator.pushNamed(context,ruta);
-            // _abrirMesa(context);
+          
           }
       ),
     );
 
   }
-  _abrirMesa(BuildContext context){
-    utils.mostrarAlerta(context, 'Abrir Mesa' , '¿Abrimos mesa?');
-  }
+ 
 
 }
