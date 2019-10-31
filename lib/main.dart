@@ -18,10 +18,11 @@ void main() {
 }
 
 class RestApp extends StatelessWidget {
-  
+
 
   @override
   Widget build(BuildContext context) {
+    print(DateTime.now().day);
 
     return Provider(
       child: MaterialApp(

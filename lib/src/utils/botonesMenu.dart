@@ -71,8 +71,13 @@ class _buttonsMenuState extends State<buttonsMenu> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+
+                if((DateTime.now().hour>13 && DateTime.now().hour<17))
                 _tipoMenu(context, 'Menú Medio día','MD','Descripción breve del menu xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
+                if(DateTime.now().hour>16 && DateTime.now().hour<23)
                 _tipoMenu(context, 'Menú Noches','N','Descripción breve del menu'),
+                if(DateTime.now().hour.toString()=="12" && DateTime.now().hour.toString()=="15")
+                  if(DateTime.friday==DateTime.now() && DateTime.thursday==DateTime.now() && DateTime.sunday==DateTime.now())
                 _tipoMenu(context, 'Menú Fin de Semana','FS','Descripción breve del menu'),
                 _tipoMenu(context, 'A la Carta','C','Descripción breve del menu'),
 

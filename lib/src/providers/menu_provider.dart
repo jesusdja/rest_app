@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:rest_app/src/models/menu_model.dart';
-import 'package:rest_app/src/models/producto_model.dart';
 
 class MenuProvider {
 
