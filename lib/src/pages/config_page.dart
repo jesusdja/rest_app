@@ -48,6 +48,12 @@ class ConfigPage extends StatelessWidget {
             textColor: Colors.white,
             onPressed: () => Navigator.of(context).pushNamed('producto'),
             ),
+          RaisedButton(
+            child: Text('Menu'),
+            color: Colors.black,
+            textColor: Colors.white,
+            onPressed: () => Navigator.of(context).pushNamed('menu'),
+          ),
         ]
       ) 
     );

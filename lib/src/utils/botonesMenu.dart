@@ -1,4 +1,7 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:rest_app/src/models/menu_model.dart';
+import 'package:rest_app/src/providers/menu_provider.dart';
 import 'package:rest_app/src/utils/utils.dart' as utils;
 
 class buttonsMenu extends StatefulWidget {
@@ -10,13 +13,13 @@ class buttonsMenu extends StatefulWidget {
 class _buttonsMenuState extends State<buttonsMenu> {
 
   List<String> _listImage = new List<String>();
-
+  final menuProvider = new MenuProvider();
   @override
   void initState() {
+
     _llenarlistImage();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,15 +74,13 @@ class _buttonsMenuState extends State<buttonsMenu> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+             //   _crearGrid(),
 
-                if((DateTime.now().hour>13 && DateTime.now().hour<17))
-                _tipoMenu(context, 'Menú Medio día','MD','Descripción breve del menu xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
-                if(DateTime.now().hour>16 && DateTime.now().hour<23)
-                _tipoMenu(context, 'Menú Noches','N','Descripción breve del menu'),
-                if(DateTime.now().hour.toString()=="12" && DateTime.now().hour.toString()=="15")
-                  if(DateTime.friday==DateTime.now() && DateTime.thursday==DateTime.now() && DateTime.sunday==DateTime.now())
-                _tipoMenu(context, 'Menú Fin de Semana','FS','Descripción breve del menu'),
+                  _tipoMenu(context, 'Menú Medio día','MD','Descripción breve del menu xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'), if(DateTime.now().hour>16 && DateTime.now().hour<23 && ((formatDate(DateTime.now(), [dd]))=="Mon" ||(formatDate(DateTime.now(), [dd]))=="Tue" ||(formatDate(DateTime.now(), [dd]))=="Wed" ||(formatDate(DateTime.now(), [dd]))=="Thu" ))
+                  _tipoMenu(context, 'Menú Noches','N','Descripción breve del menu'),
+                  _tipoMenu(context, 'Menú Fin de Semana','FS','Descripción breve del menu'),
                 _tipoMenu(context, 'A la Carta','C','Descripción breve del menu'),
+
 
               ],
             ),
@@ -88,7 +89,32 @@ class _buttonsMenuState extends State<buttonsMenu> {
       ),
     );
   }
+  Widget _crearGrid() {
+    return FutureBuilder(
+        future: menuProvider.cargarMenus(),
+        builder: (BuildContext context, AsyncSnapshot<List<MenuModel>> snapshot){
+          if(snapshot.hasData){
+            final menu = snapshot.data;
+            return GridView.builder(
+                itemCount: menu.length,
+                itemBuilder: (context , i) {
+                  if((DateTime.now().hour>menu[i].hora_ini.hour && DateTime.now().hour<menu[i].hora_fin.hour) && ((formatDate(DateTime.now(), [dd]))!="Sat" ||(formatDate(DateTime.now(), [dd]))!="Sun" ))
+                     return _tipoMenu(context,menu[i].nombre_menu,menu[i].id,menu[i].descripcion);
+                        },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 1.6,
+                )
+            );
+          }else{
+            return Center( child: CircularProgressIndicator());
+          }
+        }
+    );
 
+  }
   Widget _logo(BuildContext context){
     return Column(
         children: <Widget>[

@@ -16,6 +16,7 @@ class MenuModel {
     DateTime hora_ini;
     DateTime hora_fin;
     String categoria;
+    String descripcion;
 
     MenuModel({
         this.id,
@@ -24,6 +25,7 @@ class MenuModel {
         this.fecha_fin,
         this.hora_fin,
         this.hora_ini,
+        this.descripcion,
     });
 
     factory MenuModel.fromJson(Map<String, dynamic> json) => MenuModel(
@@ -33,6 +35,7 @@ class MenuModel {
         fecha_fin  : json["fecha_fin"],
         hora_fin     : json["hora_fin"],
         hora_ini     : json["hora_ini"],
+        descripcion     : json["descripcion"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -42,5 +45,6 @@ class MenuModel {
         "fecha_fin"  : fecha_fin,
         "hora_fin"     : hora_fin,
         "hora_ini"     : hora_ini,
+        "descripcion"  : descripcion,
     };
 }

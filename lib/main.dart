@@ -4,6 +4,7 @@ import 'package:rest_app/src/blocs/provider.dart';
 import 'package:rest_app/src/pages/home_page.dart';
 import 'package:rest_app/src/pages/config_page.dart';
 import 'package:rest_app/src/pages/login_page.dart';
+import 'package:rest_app/src/pages/menu_page.dart';
 import 'package:rest_app/src/pages/producto_page.dart';
 import 'package:rest_app/src/pages/prueba_page.dart';
 import 'package:rest_app/src/pages/carta_page.dart';
@@ -22,7 +23,6 @@ class RestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(DateTime.now().day);
 
     return Provider(
       child: MaterialApp(
@@ -36,6 +36,7 @@ class RestApp extends StatelessWidget {
           'prueba'        : ( BuildContext context ) => PruebaPage(),
           'login'         : ( BuildContext context ) => LoginPage(),
           'producto'      : ( BuildContext context ) => ProductoPage(),
+          'menu'          : ( BuildContext context ) => MenuPage(),
           'buttonsMenu'   : ( BuildContext context ) => buttonsMenu(),
         },
         theme: ThemeData(
