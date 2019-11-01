@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 MenuModel MenuModelFromJson(String str) => MenuModel.fromJson(json.decode(str));
 
 String MenuModelToJson(MenuModel data) => json.encode(data.toJson());
@@ -13,8 +15,8 @@ class MenuModel {
     String nombre_menu;
     DateTime fecha_ini;
     DateTime fecha_fin;
-    DateTime hora_ini;
-    DateTime hora_fin;
+    TimeOfDay hora_ini;
+    TimeOfDay hora_fin;
     String categoria;
     String descripcion;
 
@@ -25,6 +27,7 @@ class MenuModel {
         this.fecha_fin,
         this.hora_fin,
         this.hora_ini,
+        this.categoria,
         this.descripcion,
     });
 
@@ -35,6 +38,7 @@ class MenuModel {
         fecha_fin  : json["fecha_fin"],
         hora_fin     : json["hora_fin"],
         hora_ini     : json["hora_ini"],
+        categoria     : json["categoria"],
         descripcion     : json["descripcion"],
     );
 
@@ -45,6 +49,7 @@ class MenuModel {
         "fecha_fin"  : fecha_fin,
         "hora_fin"     : hora_fin,
         "hora_ini"     : hora_ini,
+        "categoria"    :categoria,
         "descripcion"  : descripcion,
     };
 }

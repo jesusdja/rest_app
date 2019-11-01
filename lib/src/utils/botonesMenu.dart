@@ -74,13 +74,17 @@ class _buttonsMenuState extends State<buttonsMenu> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-             //   _crearGrid(),
+               _crearGrid(),
 
+              /*
                   _tipoMenu(context, 'Menú Medio día','MD','Descripción breve del menu xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'), if(DateTime.now().hour>16 && DateTime.now().hour<23 && ((formatDate(DateTime.now(), [dd]))=="Mon" ||(formatDate(DateTime.now(), [dd]))=="Tue" ||(formatDate(DateTime.now(), [dd]))=="Wed" ||(formatDate(DateTime.now(), [dd]))=="Thu" ))
                   _tipoMenu(context, 'Menú Noches','N','Descripción breve del menu'),
                   _tipoMenu(context, 'Menú Fin de Semana','FS','Descripción breve del menu'),
                 _tipoMenu(context, 'A la Carta','C','Descripción breve del menu'),
 
+
+
+               */
 
               ],
             ),
@@ -98,9 +102,20 @@ class _buttonsMenuState extends State<buttonsMenu> {
             return GridView.builder(
                 itemCount: menu.length,
                 itemBuilder: (context , i) {
-                  if((DateTime.now().hour>menu[i].hora_ini.hour && DateTime.now().hour<menu[i].hora_fin.hour) && ((formatDate(DateTime.now(), [dd]))!="Sat" ||(formatDate(DateTime.now(), [dd]))!="Sun" ))
+                  if(menu[i].id=="V" || menu[i].id=="F")
+                    return _tipoMenu(context,menu[i].nombre_menu,menu[i].id,menu[i].descripcion);
+
+
+                  if(DateTime.now().hour>menu[i].hora_ini.hour && DateTime.now().hour<menu[i].hora_fin.hour)
+                    if((formatDate(DateTime.now(), [dd]))!="Sat" ||(formatDate(DateTime.now(), [dd]))!="Sun" )
                      return _tipoMenu(context,menu[i].nombre_menu,menu[i].id,menu[i].descripcion);
-                        },
+                    else
+                    if((formatDate(DateTime.now(), [dd]))!="Frie" ||(formatDate(DateTime.now(), [dd]))!="Sat" ||(formatDate(DateTime.now(), [dd]))!="Sun" )
+                      return _tipoMenu(context,menu[i].nombre_menu,menu[i].id,menu[i].descripcion);
+                  if((formatDate(DateTime.now(), [dd]))=="Frie" ||(formatDate(DateTime.now(), [dd]))=="Sat" ||(formatDate(DateTime.now(), [dd]))=="Sun" )
+                      return _tipoMenu(context,menu[i].nombre_menu,menu[i].id,menu[i].descripcion);
+
+                },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 10,

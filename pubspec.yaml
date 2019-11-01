@@ -30,7 +30,7 @@ dependencies:
   flutter_search_panel: ^1.0.1
   intl: ^0.15.8
   date_format: ^1.0.8
-  datetime_picker_formfield: 0.4.3
+  datetime_picker_formfield: ^0.1.8
 
 dev_dependencies:
   flutter_test:
